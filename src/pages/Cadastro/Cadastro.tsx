@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { criarUsuario } from '../../firebaseConfig';
 import { LoginButton, LoginInput } from '../Login/style'
 import { CadastroScreen, ContainerCadastro } from './style'
@@ -11,6 +12,8 @@ const Cadastro = () => {
     const [confirmarSenha, setConfirmarSenha] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
+    let navigate = useNavigate();
+
     const handleCadastrar = async () => {
         if (senha === "") {
             setErrorMessage("Campo de senha vazio.")
@@ -20,6 +23,8 @@ const Cadastro = () => {
             criarUsuario(email, senha, nome)
                 .then((user) => {
                     console.log(`Usuário ${user} criado com sucesso.`);
+                    setErrorMessage("Conta criada!! 😬😬😬")
+                    navigate('/')
                 })
                 .catch((error) => {
                     console.error(`Erro ao criar usuário: ${error.message}`);
