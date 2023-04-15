@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { criarUsuario } from '../../firebaseConfig';
 import { LoginButton, LoginInput } from '../Login/style'
 import { CadastroScreen, ContainerCadastro } from './style'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 
 const Cadastro = () => {
 
@@ -36,32 +38,36 @@ const Cadastro = () => {
     }
 
     return (
-        <CadastroScreen>
-            <ContainerCadastro>
-                <h2>E-lit</h2>
-                <p style={{ color: "red", padding: "10px", textAlign: "center" }}>{errorMessage}</p>
-                <LoginInput
-                    placeholder='Nome'
-                    onChange={(e) => setNome(e.target.value)}
-                />
-                <LoginInput
-                    placeholder='Email'
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <LoginInput
-                    placeholder='Senha'
-                    onChange={(e) => setsenha(e.target.value)}
-                />
-                <LoginInput
-                    placeholder='Confirmar senha'
-                    onChange={(e) => setConfirmarSenha(e.target.value)}
-                />
-                <LoginButton onClick={handleCadastrar}>
-                    Cadastre-se
-                </LoginButton>
+        <KeyboardAwareScrollView>
+            <CadastroScreen>
+                <ContainerCadastro>
+                    <h2>E-lit</h2>
+                    <p style={{ color: "red", padding: "10px", textAlign: "center" }}>{errorMessage}</p>
+                    <LoginInput
+                        placeholder='Nome'
+                        onChange={(e) => setNome(e.target.value)}
+                    />
+                    <LoginInput
+                        placeholder='Email'
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <LoginInput
+                        placeholder='Senha'
+                        onChange={(e) => setsenha(e.target.value)}
+                    />
+                    <LoginInput
+                        placeholder='Confirmar senha'
+                        onChange={(e) => setConfirmarSenha(e.target.value)}
+                    />
+                    <LoginButton onClick={handleCadastrar}>
+                        Cadastre-se
+                    </LoginButton>
 
-            </ContainerCadastro>
-        </CadastroScreen>
+                </ContainerCadastro>
+            </CadastroScreen>
+
+
+        </KeyboardAwareScrollView>
     )
 }
 
