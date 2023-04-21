@@ -11,6 +11,7 @@ import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 import { criarUsuario } from '../../firebaseConfig';
 import { logarUsuario } from '../../services/actions/login';
 import { useNavigate } from 'react-router-dom';
+import { PacmanLoader } from 'react-spinners';
 
 const Login = () => {
 
@@ -18,6 +19,7 @@ const Login = () => {
 
     const [email, setEmail] = useState<string>("");
     const [senha, setSenha] = useState<string>("");
+    const [loadState, setLoadState] = useState<boolean>(false);
 
     function handleClick() {
         // storeString("alouu");
@@ -43,15 +45,24 @@ const Login = () => {
                 />
                 <LoginButton
                     onClick={() => {
+                        setLoadState(true);
                         logarUsuario(email, senha)
                             .then((user) => {
                                 console.log(`Usuário ${JSON.stringify(user)} logado com sucesso`);
                                 navigate('/feed');
+                                setLoadState(false)
                             })
                             .catch((error) => {
                                 console.error(`Erro ao logarr: ${error.message}`);
+                                setLoadState(false)
                             });
-                    }}>Entrar
+                    }}>
+                    {
+                        loadState ?
+                            <PacmanLoader style={{ textAlign: "center", position: "absolute", top: 10 }} color="red" size={14} />
+                            :
+                            "Entrar"
+                    }
                 </LoginButton>
                 <p>Não possui conta?
                     <SpanLogin

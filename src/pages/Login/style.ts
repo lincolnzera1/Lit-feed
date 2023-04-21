@@ -12,6 +12,12 @@ export const LoginScreen = styled.div`
     justify-content: center;
 
     padding-top: 80px;
+
+    @media screen and (max-height: 560px){
+        padding-top: 30px;
+    }
+
+
 `
 
 export const ContainerBrancoLogin = styled.div`
@@ -41,10 +47,16 @@ export const ContainerBrancoLogin = styled.div`
 export const LogoLit = styled.img`
 
     padding-left: 25px;
+
+
+    @media screen and (max-height: 560px){
+        padding-bottom: 200px;
+        margin-bottom: 300px;
+    }
 `
 
 export const LoginInput = styled.input`
-    height: 50px;
+    min-height: 50px;
     width: 80%;
 
     border: 1px solid lightgray;
@@ -64,8 +76,10 @@ export const LoginInput = styled.input`
 export const LoginButton = styled.button`
     background-color: #22e922;
 
+    position: relative;
+
     width: 80%;
-    height: 50px;
+    min-height: 50px;
 
     text-align: center;
     font-size: 22px;
