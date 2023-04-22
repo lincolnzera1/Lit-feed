@@ -4,6 +4,10 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from 'react';
 import { updateProfile } from "firebase/auth";
 import { getUserName } from './services/actions/userState';
+import { getDatabase, onValue, push } from "firebase/database";
+import { ref, set } from "firebase/database";
+import { uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
+
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
@@ -13,12 +17,57 @@ const firebaseConfig = {
     storageBucket: "e-lit-f5390.appspot.com",
     messagingSenderId: "34741452193",
     appId: "1:34741452193:web:44f1f77062ec2944409fe0",
-    measurementId: "G-BR2F0JQHGE"
+    measurementId: "G-BR2F0JQHGE",
+    databaseURL: "https://e-lit-f5390-default-rtdb.firebaseio.com",
 };
 
 export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
+
+// TODO: Replace the following with your app's Firebase project configuration
+// See: https://firebase.google.com/docs/web/learn-more#config-object
+// Initialize Firebase
+
+
+// Initialize Realtime Database and get a reference to the service
+export const database = getDatabase(app);
+export const storage = getStorage(app);
+const db2 = getDatabase();
+
+export function writeUserData(stringSimples: any) {
+    const db = getDatabase();
+    push(ref(db, 'mensagens'), {
+        stringSimples: stringSimples
+    });
+}
+
+const stringsRef = ref(database, 'mensagens');
+type StringData = {
+    id: string;
+    value: unknown;
+};
+
+export function listenStrings(callback: (strings: StringData[]) => void) {
+    const db = getDatabase();
+    const stringsRef = ref(db, 'strings');
+
+    const unsubscribe = onValue(stringsRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+            const stringData = Object.entries(data).map(([id, value]) => ({ id, value }));
+            callback(stringData);
+        } else {
+            callback([]);
+        }
+    }, (error) => {
+        console.error("Erro ao ler dados:", error);
+    });
+
+    return unsubscribe;
+}
+
+
 
 // export const [mensagemErro, setMensagemErro] = useState("");
 
@@ -27,7 +76,7 @@ export const auth = getAuth(app);
 export const storePost = async (post: string) => {
     const stringsCol = collection(db, 'posts');
     const nome = await getUserName();
-    await addDoc(stringsCol, { autor: nome, post: post,  });
+    await addDoc(stringsCol, { autor: nome, post: post, });
     console.log('String armazenada com sucesso: ' + post);
 
 }

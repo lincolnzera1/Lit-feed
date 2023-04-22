@@ -24,9 +24,18 @@ export const FeedAppBar = styled.div`
     position: absolute;
     top: 0;
 
+    box-sizing: border-box;
+
     display: flex;
+    /* flex-direction: column; */
     align-items: center;
     justify-content: center;
+
+    /* border: 2px solid red; */
+
+    h2 {
+        margin-left: 70px;
+    }
 `
 
 export const FeedMensagens = styled.div`
@@ -38,6 +47,11 @@ export const FeedMensagens = styled.div`
     border: 1px solid black;
 
     overflow: auto;
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
 
 export const FeedSendButton = styled.button`
@@ -54,4 +68,23 @@ export const FeedSendButton = styled.button`
     text-align: center;
 
     border: 2px solid black;
+`
+
+export const ButtonSair = styled.button`
+    height: 40px;
+    width: 70px;
+
+    /* margin-left: auto; */
+    /* align-self: flex-end; */
+    justify-self: flex-end;
+    margin-left: 20px;
+
+    border-radius: 8px;
+    border: 1px solid black;
+    /* border: 0; */
+
+    background-color: transparent;
+
+    font-size: 18px;
+    font-weight: 500;
 `
