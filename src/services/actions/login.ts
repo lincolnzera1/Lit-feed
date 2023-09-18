@@ -1,9 +1,12 @@
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebaseConfig";
 
 // const auth = getAuth();
-
 
 export const logarUsuario = (email: string, password: string) => {
   return new Promise((resolve, reject) => {
@@ -13,9 +16,12 @@ export const logarUsuario = (email: string, password: string) => {
         const user = userCredential.user;
         console.log(`Usuário ${user} logado com sucesso.`);
 
+        
+
         // Get user display name
         const displayName = user.displayName;
-        console.log(displayName + " é o nome da fera")        
+        console.log(displayName + " é o nome da fera");
+        localStorage.setItem("usuario", displayName ?? "Sem nome");
         resolve(user);
       })
       .catch((error) => {
@@ -26,4 +32,3 @@ export const logarUsuario = (email: string, password: string) => {
       });
   });
 };
-
