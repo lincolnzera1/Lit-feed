@@ -4,20 +4,21 @@ export const FeedFundo = styled.div`
   height: 100vh;
   width: 100vw;
 
-  background-color: white;
-  align-items: center;
+  background-color: lightyellow;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  /* overflow: scroll; */
+
+  header {
+  }
 `;
 
 export const FeedAppBar = styled.div`
   height: 60px;
   width: 100vw;
 
-  background-color: #22e922;
+  position: relative;
 
+  background-color: #22e922;
 
   display: grid;
   grid-template-columns: 33% 33% 33%;
@@ -25,31 +26,15 @@ export const FeedAppBar = styled.div`
 
   box-sizing: border-box;
 
+  overflow: hidden;
+
   /* border: 2px solid red; */
 
   h2 {
-    position: absolute;
-    left: 10px;
-
-    text-align: center;
+    cursor: pointer;
   }
 `;
 
-export const FeedMensagens = styled.div`
-  height: 60%;
-  width: 80%;
-
-  margin-top: 50px;
-
-  border: 1px solid black;
-
-  overflow: auto;
-
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
 
 export const FeedSendButton = styled.button`
   height: 50px;
@@ -92,6 +77,10 @@ export const ButtonSair = styled.button`
   &:hover {
     background-color: #33ff33; /* Cor de fundo no hover */
   }
+
+  @media (max-width: 700px) {
+    visibility: hidden;
+  }
 `;
 
 export const BotaoPadrao = styled.button`
@@ -119,8 +108,42 @@ export const BotaoPadrao = styled.button`
   }
 `;
 
+export const BotaoPadraoMobile = styled.button`
+  height: 40px;
+
+  font-size: 16px;
+  font-weight: 500;
+
+  padding: 5px 5px;
+  box-sizing: border-box;
+
+  margin-left: 20px;
+  /* align-self: flex-end; */
+
+  border-radius: 8px;
+  border: 1px solid black;
+  /* border: 0; */
+
+  background-color: transparent;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: #33ff33; /* Cor de fundo no hover */
+  }
+  
+
+  @media (min-width: 700px) {
+    visibility: hidden;
+  }
+  
+`;
 
 export const DivBotoes = styled.div`
   position: absolute;
-  right: 150px
-`
+  right: 150px;
+
+  @media (max-width: 700px) {
+    visibility: hidden;
+  }
+`;

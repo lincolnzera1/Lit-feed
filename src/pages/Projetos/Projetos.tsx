@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { FeedAppBar, FeedSendButton } from "../Feed/style";
 import AppBar from "../../components/AppBar";
 import { GridContainer, GridItem, ProjetosFundo } from "./styles";
-import { getPosts, storePost } from "../../firebaseConfig";
+import { getPosts, getProjetos, storePost } from "../../firebaseConfig";
 import { LoginInput } from "../Login/style";
+import AddProjetoButton from "../../components/AddProjetoButton";
+import ModalProjetos from "../../components/ModalProjetos";
 
 const Projetos = () => {
   const items = [
@@ -16,10 +18,11 @@ const Projetos = () => {
     "Item 7",
   ];
   const [posts, setPosts] = useState<any>([]);
-  const [mensagem, setMensagem] = useState("");
+  const [mensagem, setMensagem] = useState<string>("");
+  const [modalState, setModalState] = useState<boolean>(false);
   useEffect(() => {
     const receberPosts = () => {
-      getPosts().then((strings: any) => {
+      getProjetos().then((strings: any) => {
         // console.log("As strings foram: " + JSON.stringify(strings))
         setPosts(strings);
       });
@@ -27,33 +30,38 @@ const Projetos = () => {
     receberPosts();
   }, []);
 
+  const handleCloseModal = () => {
+    setModalState(!modalState);
+  };
+
+  const handleCloseModalAtualizar = () => {
+    setModalState(!modalState);
+    window.location.reload();
+  };
+
   return (
     <ProjetosFundo style={{ width: "100vw", height: "100vh" }}>
+      {modalState ? (
+        <ModalProjetos
+          onCloseAtualizar={handleCloseModalAtualizar}
+          onClose={handleCloseModal}
+        />
+      ) : null}
       <AppBar />
-      <LoginInput
-        onChange={(e: any) => setMensagem(e.target.value)}
-        placeholder="Envie uma mensagem..."
-      />
-      <FeedSendButton
-        onClick={() => {
-          storePost(mensagem);
-          // writeUserData(mensagem);
-        }}
-      >
-        Enviar
-      </FeedSendButton>
       <GridContainer>
         {posts.map((item: any, index: any) =>
           item.autor === localStorage.getItem("usuario") ? (
             <GridItem key={index}>
               <div>
-                <h2>{item.autor}</h2>
-                <p>{item.post}</p>
+                <h2>{item.nomeProjeto} - {item.autor}</h2>
+                <p>{item.descricao}</p>
               </div>
             </GridItem>
           ) : null
         )}
+        
       </GridContainer>
+      <AddProjetoButton onClick={handleCloseModal}></AddProjetoButton>
     </ProjetosFundo>
   );
 };

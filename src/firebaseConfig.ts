@@ -89,12 +89,12 @@ export const storePost = async (post: string) => {
     const response = await addDoc(stringsCol, { autor: nome, post: post });
     console.log("String armazenada com sucesso: " + post);
   } catch (error) {
-    console.log("aconteceu um erro ao storePost")
+    console.log("aconteceu um erro ao storePost");
   }
 };
 
 export async function getPosts() {
-  console.log("oioioioi");
+  // console.log("oioioioi");
   const stringsCol = collection(db, "posts");
   const stringsSnapshot = await getDocs(stringsCol);
   const stringsList = stringsSnapshot.docs.map((doc) => doc.data());
@@ -102,10 +102,35 @@ export async function getPosts() {
   return stringsList;
 }
 
+export async function getProjetos() {
+  // console.log("oioioioi");
+  const stringsCol = collection(db, "projetos");
+  const stringsSnapshot = await getDocs(stringsCol);
+  const stringsList = stringsSnapshot.docs.map((doc) => doc.data());
+  console.log(stringsList);
+  return stringsList;
+}
+
+export const storeProject = async (nomeProjeto: string, descricao: string) => {
+  const stringsCol = collection(db, "projetos");
+  const nome = await getUserName();
+
+  try {
+    const response = await addDoc(stringsCol, {
+      autor: localStorage.getItem("usuario"),
+      nomeProjeto: nomeProjeto,
+      descricao: descricao,
+    });
+    console.log("Projeto armazenado com sucesso: " + nomeProjeto);
+  } catch (error) {
+    console.log("aconteceu um erro ao storeProject");
+  }
+};
+
 export const criarUsuario = (
   email: string,
   password: string,
-  displayName: string
+  displayName: string,
 ) => {
   return new Promise((resolve, reject) => {
     createUserWithEmailAndPassword(auth, email, password)

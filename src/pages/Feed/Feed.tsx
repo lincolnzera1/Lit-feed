@@ -1,35 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { LoginInput } from "../Login/style";
+import { useEffect, useState } from "react";
 import {
-  BotaoPadrao,
-  ButtonSair,
-  FeedAppBar,
   FeedFundo,
-  FeedMensagens,
-  FeedSendButton,
 } from "./style";
 
-import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
 
 // Material ui
-import { Button, Typography } from "@mui/material";
 import {
-  database,
-  db,
-  getPosts,
+  getProjetos,
   listenStrings,
   storage,
-  storePost,
-  writeUserData,
 } from "../../firebaseConfig";
-import { handleLogout } from "../../services/actions/logout";
 import { useNavigate } from "react-router-dom";
-import { DataSnapshot, onValue } from "firebase/database";
-import ImageSlider from "../Carrossel/Home";
 
 import { useRef } from "react";
 import { ref, uploadBytes } from "firebase/storage";
 import AppBar from "../../components/AppBar";
+import { GridContainer, GridItem } from "../Projetos/styles";
 
 interface Mensagem {
   id: string;
@@ -57,7 +43,7 @@ const Feed = () => {
 
   useEffect(() => {
     const receberPosts = () => {
-      getPosts().then((strings: any) => {
+      getProjetos().then((strings: any) => {
         // console.log("As strings foram: " + JSON.stringify(strings))
         setPosts(strings);
       });
@@ -87,32 +73,18 @@ const Feed = () => {
   return (
     <FeedFundo>
       <AppBar />
-      <LoginInput
-        onChange={(e: any) => setMensagem(e.target.value)}
-        placeholder="Envie uma mensagem..."
-      />
-      {/* <FeedSendButton
-        onClick={() => {
-          storePost(mensagem);
-          // writeUserData(mensagem);
-        }}
-      >
-        Enviar
-      </FeedSendButton> */}
-      {/* <div>
-        <input type="file" ref={fileInputRef} />
-        <button onClick={handleUpload}>Fazer upload</button>
-      </div> */}
-      {/* <FeedMensagens>
-        <ImageSlider slides={posts} />
-
-        {posts.map((string: any, index) => (
-                    <div key={index}>
-                        <li>{string.autor}</li>
-                        <li>{string.post}</li>
-                    </div>
-                ))}
-      </FeedMensagens> */}
+      <GridContainer>
+        {posts.map((item: any, index: any) => (
+          <GridItem key={index}>
+            <div>
+              <h2>
+                {item.nomeProjeto} - {item.autor}
+              </h2>
+              <p>{item.descricao}</p>
+            </div>
+          </GridItem>
+        ))}
+      </GridContainer>
     </FeedFundo>
   );
 };
