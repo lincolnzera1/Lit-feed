@@ -8,7 +8,10 @@ import Projetos from "./pages/Projetos/Projetos";
 
 const App = () => {
   return (
-    <div>
+    <div style={{
+      margin: 0,
+      padding: 0
+    }}>
       <GlobalStyle />
       <BrowserRouter>
         <Routes>

@@ -1,8 +1,12 @@
 import styled from "styled-components";
 
 export const FeedFundo = styled.div`
+
   height: 100vh;
   width: 100vw;
+
+  margin: 0 !important;
+  padding: 0 !important;
 
   background-color: lightyellow;
 

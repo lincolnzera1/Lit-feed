@@ -13,14 +13,19 @@ import { auth } from "../firebaseConfig";
 import { MenuButton, MenuOptions, MenuLink, MenuItem } from "./1styles";
 import Menu from "@mui/material/Menu/Menu";
 import Button from "@mui/material/Button";
+
+import { Menubar } from "primereact/menubar";
+import getItems from "./Menu/Menu";
+import { InputText } from "primereact/inputtext";
+
+import  Lit  from "../assets/lit.png";
+
 const AppBar = () => {
   let navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      console.log("Usuário deslogado");
-      console.log("SAINDOOOO");
       navigate("/"); // Use a função de navegação aqui
     } catch (error) {
       console.error("Erro ao fazer logout:", error);
@@ -29,48 +34,18 @@ const AppBar = () => {
 
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleClick = (event: any) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleSair = () => {
-    handleLogout();
-    setAnchorEl(null);
-  };
-
-  const handleProjetos = () => {
-    setAnchorEl(null);
-    navigate("/projetos");
-  };
-
-  const handleAniversariantes = () => {
-    // handleLogout()
-    setAnchorEl(null);
-  };
-  return (
-    <FeedAppBar>
-      <h2
-        onClick={() => {
-          navigate("/feed");
-        }}
-      >
-        Bem vindo ao LIT
-      </h2>
-      <BotaoPadraoMobile onClick={handleClick}>Abrir Menu</BotaoPadraoMobile>
-      <Menu anchorEl={anchorEl} open={Boolean(anchorEl)}>
-        <MenuItem onClick={handleProjetos}>Seus projetos</MenuItem>
-        <MenuItem onClick={handleAniversariantes}>
-          Aniversariante do mês
-        </MenuItem>
-        <MenuItem onClick={handleLogout}>Sair</MenuItem>
-      </Menu>
-      <DivBotoes>
-        <BotaoPadrao onClick={() => {navigate("/projetos")}}>Seus projetos</BotaoPadrao>
-        <BotaoPadrao>Aniversariantes do mês</BotaoPadrao>
-      </DivBotoes>
-      <ButtonSair onClick={handleLogout}>Sair</ButtonSair>
-    </FeedAppBar>
+  const items = getItems();
+  // HEADER
+  const start = (
+    <img
+      alt="logo"
+      src={Lit}
+      height="40"
+      className="mr-2"
+    ></img>
   );
+  const end = <InputText placeholder="Search" type="text" className="w-full" />;
+  return <Menubar model={items} start={start} end={end} />;
 };
 
 export default AppBar;

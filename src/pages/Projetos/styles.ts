@@ -1,22 +1,18 @@
 import styled from "@emotion/styled";
 
 export const ProjetosFundo = styled.div`
-    background-color: lightyellow;
-
-    height: auto;
-
-    
-`
+  background-color: lightyellow;
+  height: 100vh;
+  /* width: 100vw; */
+`;
 
 export const GridContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
 
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 
-  height: 100%;
-  width: 100%;
 
   padding: 100px;
 
@@ -30,7 +26,7 @@ export const GridItem = styled.div`
   min-width: 300px;
 
   @media (max-width: 1025px) {
-   width : 40% ;
+    width: 40%;
   }
 
   overflow: auto;
@@ -47,5 +43,4 @@ export const GridItem = styled.div`
     font-size: 18px;
     margin-bottom: 10px;
   }
-
 `;
