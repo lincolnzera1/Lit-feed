@@ -177,7 +177,7 @@ const Cadastro = () => {
   return (
     <CadastroScreen>
       <ContainerCadastro>
-        <h2>E-lit</h2>
+        {/* <h2>E-lit</h2> */}
         {/* <p style={{ color: "red", padding: "10px", textAlign: "center" }}>
           {errorMessage}
         </p> */}
