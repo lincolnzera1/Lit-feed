@@ -19,7 +19,7 @@ const Cadastro = () => {
   const [email, setEmail] = useState("");
   const [senha, setsenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState(""); */
-  const [errorMessage, setErrorMessage] = useState<String>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const [date, setDate] = useState<Nullable<Date>>(null);
 
   const handleDateChange = (e: any) => {
@@ -30,7 +30,7 @@ const Cadastro = () => {
 
   let navigate = useNavigate();
 
-  const handleCadastrar = async () => {
+  /*   const handleCadastrar = async () => {
     if (senha === "") {
       setErrorMessage("Campo de senha vazio.");
       console.log(senha);
@@ -48,7 +48,7 @@ const Cadastro = () => {
     } else {
       setErrorMessage("Senhas não são iguais ou campo de senha está vazio.");
     }
-  };
+  }; */
 
   // FORMIKS////////////////////////////////
 
@@ -71,7 +71,23 @@ const Cadastro = () => {
     });
   };
 
-  const formik = useFormik({
+  type FormikTouchedKeys = {
+    nome?: String;
+    email?: String;
+    senha?: String;
+    confirmarSenha?: String;
+    date?: String;
+  };
+
+  type FormikTouchedKeys2 = {
+    nome: string;
+    email: string;
+    senha: string;
+    confirmarSenha: string;
+    date: Nullable<Date>;
+  };
+
+  const formik = useFormik<FormikTouchedKeys2>({
     initialValues: {
       nome: "",
       email: "",
@@ -80,7 +96,7 @@ const Cadastro = () => {
       date: null,
     },
     validate: (data) => {
-      let errors = {};
+      let errors: FormikTouchedKeys = {};
 
       if (!data.nome) {
         errors!.nome = "nome is required.";
@@ -145,10 +161,12 @@ const Cadastro = () => {
     },
   });
 
-  const isFormFieldInvalid = (name) =>
+  type FormikTouchedKeys3 = "nome" | "email" | "senha" | "confirmarSenha" | "date";
+
+  const isFormFieldInvalid = (name: FormikTouchedKeys3) =>
     !!(formik.touched[name] && formik.errors[name]);
 
-  const getFormErrorMessage = (name) => {
+  const getFormErrorMessage = (name: FormikTouchedKeys3) => {
     return isFormFieldInvalid(name) ? (
       <small className="p-error">{formik.errors[name]}</small>
     ) : (
@@ -287,7 +305,8 @@ const Cadastro = () => {
                   }} */
                   showIcon
                 />
-                {getFormErrorMessage(errorMessage)}
+                {getFormErrorMessage(errorMessage as FormikTouchedKeys3)}
+
               </div>
             </div>
 

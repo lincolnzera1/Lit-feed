@@ -129,8 +129,8 @@ export const storeProject = async (nomeProjeto: string, descricao: string) => {
 };
 
 export const criarDataNascimento = async (
-  nome: string,
-  email: string,
+  nome: String,
+  email: String,
   dataNascimento: Nullable<Date>
 ) => {
   const banco = collection(db, "cadastrosDatas");
@@ -155,19 +155,19 @@ export const criarDataNascimento = async (
 };
 
 export const criarUsuario = (
-  email: string,
-  password: string,
-  displayName: string
+  email: String,
+  password: String,
+  displayName: String
 ) => {
   return new Promise((resolve, reject) => {
-    createUserWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, email as string, password as string)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
 
         // Update user profile with display name
         updateProfile(user, {
-          displayName: displayName,
+          displayName: displayName as string,
         })
           .then(() => {
             console.log(`Usuário ${user} criado com sucesso.`);

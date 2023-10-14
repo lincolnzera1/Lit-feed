@@ -70,7 +70,7 @@ export const LoginInput = styled.input`
 `;
 
 export const LoginButton = styled.button`
-  background-color: #22e922;
+  background-color: #C1FFA3;
 
   position: relative;
 
@@ -82,7 +82,7 @@ export const LoginButton = styled.button`
   color: black;
   font-weight: bold;
 
-  border: 2px solid black;
+  border: 2px solid lightgray;
   border-radius: 8px;
 
   margin-top: 40px;

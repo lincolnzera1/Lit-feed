@@ -69,6 +69,16 @@ const Projetos = () => {
   const toast = useRef<any>(null);
   const [visible, setVisible] = useState(false);
 
+  type FormikTouchedKeys = {
+    value?: string;
+    descricao?: string;
+  };
+
+  type FormikTouchedKeys2 = {
+    value: string;
+    descricao: string;
+  };
+
   const show = () => {
     toast.current!.show({
       severity: "success",
@@ -77,19 +87,18 @@ const Projetos = () => {
     });
   };
 
-  const formik = useFormik({
+  const formik = useFormik<FormikTouchedKeys2>({
     initialValues: {
       value: "",
       descricao: "",
     },
     validate: (data) => {
-      let errors = {};
+      let errors: FormikTouchedKeys = {};
 
       if (!data.value) {
         errors!.value = "Name - Surname is required.";
 
         setErrorMessage("value");
-        
 
         console.log("ERRO ACUSADO##########");
       } else if (!data.descricao) {
@@ -117,10 +126,12 @@ const Projetos = () => {
     },
   });
 
-  const isFormFieldInvalid = (name) =>
+  type FormikTouchedKeys3 = "value" | "descricao";
+
+  const isFormFieldInvalid = (name: FormikTouchedKeys3) =>
     !!(formik.touched[name] && formik.errors[name]);
 
-  const getFormErrorMessage = (name) => {
+  const getFormErrorMessage = (name: FormikTouchedKeys3) => {
     return isFormFieldInvalid(name) ? (
       <small className="p-error">{formik.errors[name]}</small>
     ) : (
@@ -245,7 +256,7 @@ const Projetos = () => {
               {/* Use o nome do campo definido no initialValues */}
             </span>
 
-            {getFormErrorMessage(errorMessage)}
+            {getFormErrorMessage(errorMessage as FormikTouchedKeys3)}
             <Button type="submit" label="Salvar projeto" />
           </form>
         </div>
