@@ -13,6 +13,7 @@ const getItems = () => {
     {
       label: "Meus projetos",
       icon: "pi pi-fw pi-pencil",
+      command: () => navigate("/projetos"),
     },
     {
       label: "Aniversariantes do mês",

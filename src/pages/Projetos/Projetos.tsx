@@ -19,6 +19,7 @@ import { classNames } from "primereact/utils";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { Carousel } from "primereact/carousel";
+import { Card } from "primereact/card";
 
 interface Product {
   nomeProjeto: String;
@@ -36,7 +37,10 @@ const Projetos = () => {
     const receberPosts = () => {
       getProjetos().then((strings: any) => {
         setPosts(strings);
-        let lista: [] = strings;
+        let lista: [] = strings.filter(
+          (product: Product) =>
+            product.autor === localStorage.getItem("usuario")
+        );
         setPostsCarrossel(strings.slice(0, lista.length));
         setFilteredProducts(
           strings
@@ -135,6 +139,14 @@ const Projetos = () => {
       numScroll: 1,
     },
   ];
+
+  const headerCard = (
+    <img
+      alt="Card"
+      src="https://primefaces.org/cdn/primereact/images/usercard.png"
+    />
+  );
+
   const productTemplate = (product: Product) => {
     return (
       <div
@@ -143,12 +155,16 @@ const Projetos = () => {
         }}
         className="border-3 surface-border border-round m-2 text-center py-5 px-3 testando"
       >
-        {product.autor === localStorage.getItem("usuario") ? (
-          <div>
-            <h2 className="mb-2">{product.autor}</h2>
-            <h4 className="mt-0 mb-3">{product.descricao}</h4>
-            {/* <Tag value={product.nomeProjeto} severity={getSeverity(product)}></Tag> */}
-            <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
+        <div className="card flex justify-content-center">
+          <Card
+            title={product.nomeProjeto}
+            subTitle={product.autor}
+            // footer={footerCard}
+            header={headerCard}
+            className="md:w-25rem"
+          >
+            <p className="m-0">{product.descricao}</p>
+            <div className="mt-3">
               <Button size="large" icon="pi pi-file-edit" rounded />
               <Button
                 size="large"
@@ -157,8 +173,8 @@ const Projetos = () => {
                 severity="danger"
               />
             </div>
-          </div>
-        ) : null}
+          </Card>
+        </div>
       </div>
     );
   };
@@ -176,20 +192,6 @@ const Projetos = () => {
         circular
         autoplayInterval={3000}
       />
-      {/* <GridContainer>
-        {posts.map((item: any, index: any) =>
-          item.autor === localStorage.getItem("usuario") ? (
-            <GridItem key={index}>
-              <div>
-                <h2>
-                  {item.nomeProjeto} - {item.autor}
-                </h2>
-                <p>{item.descricao}</p>
-              </div>
-            </GridItem>
-          ) : null
-        )}
-      </GridContainer> */}
       <Dialog
         header="Cadastro de projeto"
         visible={visible}

@@ -4,6 +4,9 @@ export const ProjetosFundo = styled.div`
   background-color: lightyellow;
   height: 100vh;
   /* width: 100vw; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 export const GridContainer = styled.div`
@@ -12,7 +15,6 @@ export const GridContainer = styled.div`
   margin: 0 auto;
 
   /* overflow-y: scroll; */
-
 
   padding: 100px;
 

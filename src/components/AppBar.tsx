@@ -12,13 +12,13 @@ import { signOut } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 import { MenuButton, MenuOptions, MenuLink, MenuItem } from "./1styles";
 import Menu from "@mui/material/Menu/Menu";
-import Button from "@mui/material/Button";
 
 import { Menubar } from "primereact/menubar";
 import getItems from "./Menu/Menu";
 import { InputText } from "primereact/inputtext";
 
-import  Lit  from "../assets/lit.png";
+import Lit from "../assets/lit.png";
+import { Button } from "primereact/button";
 
 const AppBar = () => {
   let navigate = useNavigate();
@@ -36,16 +36,20 @@ const AppBar = () => {
 
   const items = getItems();
   // HEADER
-  const start = (
-    <img
-      alt="logo"
-      src={Lit}
-      height="40"
-      className="mr-2"
-    ></img>
+  const start = <img alt="logo" src={Lit} height="40" className="mr-2"></img>;
+  const end = <Button label="Sair" severity="danger" onClick={handleLogout}/>;
+  return (
+    <div
+      style={{
+        position: "fixed",
+        top: 0,
+        width: "100vw",
+        zIndex: 10,
+      }}
+    >
+      <Menubar model={items} start={start} end={end} />
+    </div>
   );
-  const end = <InputText placeholder="Search" type="text" className="w-full" />;
-  return <Menubar model={items} start={start} end={end} />;
 };
 
 export default AppBar;

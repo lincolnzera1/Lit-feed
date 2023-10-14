@@ -10,6 +10,10 @@ export const FeedFundo = styled.div`
 
   background-color: lightyellow;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   /* overflow: scroll; */
 
   header {

@@ -29,6 +29,11 @@ import { useFormik } from "formik";
 import { classNames } from "primereact/utils";
 import { InputTextarea } from "primereact/inputtextarea";
 
+import { Ripple } from "primereact/ripple";
+import { Card } from "primereact/card";
+
+import Lit from "../../assets/lit.png";
+
 interface Mensagem {
   id: string;
   value: string;
@@ -115,6 +120,27 @@ const Feed = () => {
 
   const [products, setProducts] = useState<Product[]>([]);
 
+  // CARD
+
+  const headerCard = (
+    <img
+      alt="Card"
+      src="https://primefaces.org/cdn/primereact/images/usercard.png"
+    />
+  );
+  const footerCard = (
+    <>
+      {/* <Button size="small" label="Like" icon="pi pi-check" />
+      <Button
+      size="small"
+        label="Cancel"
+        severity="secondary"
+        icon="pi pi-times"
+        style={{ marginLeft: "0.5em" }}
+      /> */}
+    </>
+  );
+
   useEffect(() => {}, []);
 
   const productTemplate = (product: Product) => {
@@ -125,14 +151,22 @@ const Feed = () => {
         }}
         className="border-3 surface-border border-round m-2 text-center py-5 px-3 testando"
       >
-        <div>
-          <h2 className="mb-2">{product.autor}</h2>
-          <h4 className="mt-0 mb-3">{product.descricao}</h4>
-          {/* <Tag value={product.nomeProjeto} severity={getSeverity(product)}></Tag> */}
-          <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
-            <Button size="large" icon="pi pi-file-edit" rounded />
-            <Button size="large" icon="pi pi-trash" rounded severity="danger" />
-          </div>
+        <div className="card flex justify-content-center">
+          <Card
+            title={product.nomeProjeto}
+            subTitle={product.autor}
+            footer={footerCard}
+            header={headerCard}
+            className="md:w-25rem"
+          >
+            {/* <h2 className="mb-2">{product.nomeProjeto}</h2> */}
+            {/* <h4 className="mt-0 mb-3">{product.descricao}</h4> */}
+            <p className="m-0">
+              {product.descricao}
+            </p>
+            {/* <Tag value={product.nomeProjeto} severity={getSeverity(product)}></Tag> */}
+            
+          </Card>
         </div>
       </div>
     );
