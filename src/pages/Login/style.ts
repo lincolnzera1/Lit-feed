@@ -91,6 +91,8 @@ export const LoginButton = styled.button`
 export const SpanLogin = styled.span`
   color: #22e922;
   font-size: 18px;
+
+  cursor: pointer;
 `;
 
 export const DateInput = styled.input`
