@@ -32,6 +32,7 @@ const Projetos = () => {
   const [modalState, setModalState] = useState<boolean>(false);
   const [postsCarrossel, setPostsCarrossel] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const [errorMessage, setErrorMessage] = useState<String>("");
 
   useEffect(() => {
     const receberPosts = () => {
@@ -82,10 +83,20 @@ const Projetos = () => {
       descricao: "",
     },
     validate: (data) => {
-      let errors;
+      let errors = {};
 
       if (!data.value) {
         errors!.value = "Name - Surname is required.";
+
+        setErrorMessage("value");
+        
+
+        console.log("ERRO ACUSADO##########");
+      } else if (!data.descricao) {
+        errors!.descricao = "descricao - descricao is required.";
+        setErrorMessage("descricao");
+
+        console.log(" 2 - ERRO ACUSADO##########");
       }
 
       return errors;
@@ -106,14 +117,10 @@ const Projetos = () => {
     },
   });
 
-  type FormikTouchedKeys = keyof {
-    value: string;
-    descricao: string;
-  };
-  const isFormFieldInvalid = (name: FormikTouchedKeys) =>
+  const isFormFieldInvalid = (name) =>
     !!(formik.touched[name] && formik.errors[name]);
 
-  const getFormErrorMessage = (name: FormikTouchedKeys) => {
+  const getFormErrorMessage = (name) => {
     return isFormFieldInvalid(name) ? (
       <small className="p-error">{formik.errors[name]}</small>
     ) : (
@@ -234,11 +241,11 @@ const Projetos = () => {
                   "p-invalid": isFormFieldInvalid("descricao"),
                 })}
               />
-              <label htmlFor="descricao">descricao</label>{" "}
+              <label>descricao</label>{" "}
               {/* Use o nome do campo definido no initialValues */}
             </span>
 
-            {getFormErrorMessage("value")}
+            {getFormErrorMessage(errorMessage)}
             <Button type="submit" label="Salvar projeto" />
           </form>
         </div>

@@ -6,6 +6,10 @@ const getItems = () => {
 
   const items = [
     {
+      label: `${localStorage.getItem("usuario")}`,
+      icon: "pi pi-fw pi-user"
+    },
+    {
       label: "Projetos do lit",
       icon: "pi pi-fw pi-briefcase",
       command: () => navigate("/feed"),

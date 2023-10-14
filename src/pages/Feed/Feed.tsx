@@ -4,35 +4,20 @@ import { FeedFundo } from "./style";
 // Material ui
 import {
   getProjetos,
-  listenStrings,
   storage,
-  storeProject,
 } from "../../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 
 import { useRef } from "react";
 import { ref, uploadBytes } from "firebase/storage";
 import AppBar from "../../components/AppBar";
-import { GridContainer, GridItem } from "../Projetos/styles";
-import { Menubar } from "primereact/menubar";
-import { InputText } from "primereact/inputtext";
-import items from "../../components/Menu/Menu";
 import getItems from "../../components/Menu/Menu";
 import { Carousel } from "primereact/carousel";
-import { Tag } from "primereact/tag";
-import { Button } from "primereact/button";
-import { Dialog } from "primereact/dialog";
 
 import "./carousel.css";
-import { Toast } from "primereact/toast";
-import { useFormik } from "formik";
-import { classNames } from "primereact/utils";
-import { InputTextarea } from "primereact/inputtextarea";
 
-import { Ripple } from "primereact/ripple";
 import { Card } from "primereact/card";
 
-import Lit from "../../assets/lit.png";
 
 interface Mensagem {
   id: string;

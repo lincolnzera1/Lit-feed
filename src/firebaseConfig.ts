@@ -12,6 +12,7 @@ import { getUserName } from "./services/actions/userState";
 import { getDatabase, onValue, push } from "firebase/database";
 import { ref, set } from "firebase/database";
 import { uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
+import { Nullable } from "primereact/ts-helpers";
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
@@ -127,10 +128,36 @@ export const storeProject = async (nomeProjeto: string, descricao: string) => {
   }
 };
 
+export const criarDataNascimento = async (
+  nome: string,
+  email: string,
+  dataNascimento: Nullable<Date>
+) => {
+  const banco = collection(db, "cadastrosDatas");
+  const usuario = await getUserName();
+
+  try {
+    const response = await addDoc(banco, {
+      nome: nome,
+      email: email,
+      dataNascimento: dataNascimento,
+    });
+    console.log(
+      "Cadastro com email " +
+        email +
+        " e data: " +
+        dataNascimento +
+        " feito com sucesso!"
+    );
+  } catch (error) {
+    console.log("aconteceu um erro ao cadastrosDatas: " + error);
+  }
+};
+
 export const criarUsuario = (
   email: string,
   password: string,
-  displayName: string,
+  displayName: string
 ) => {
   return new Promise((resolve, reject) => {
     createUserWithEmailAndPassword(auth, email, password)
