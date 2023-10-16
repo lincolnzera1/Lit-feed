@@ -6,7 +6,45 @@ export const ProjetosFundo = styled.div`
   /* width: 100vw; */
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
+
+  position: relative;
+
+  .item-do-dataview {
+    min-height: 100%;
+    /* max-height: 30px; */
+
+    position: relative;
+  }
+
+  .descricao {
+    max-height: 150px;
+    overflow: auto;
+
+    /* background-color: red; */
+  }
+
+  .botao {
+    position: absolute;
+    right: 20px;
+    bottom: 15px;
+
+    display: flex;
+
+    
+  }
+
+  .botoes {
+    height: 35px;
+    width: 35px;
+
+  }
+
+  .autor {
+    position: absolute;
+    left: 24px;
+    bottom: 18px;
+  }
 `;
 
 export const GridContainer = styled.div`

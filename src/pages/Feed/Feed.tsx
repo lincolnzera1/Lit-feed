@@ -2,10 +2,7 @@ import { useEffect, useState } from "react";
 import { FeedFundo } from "./style";
 
 // Material ui
-import {
-  getProjetos,
-  storage,
-} from "../../firebaseConfig";
+import { getProjetos, storage } from "../../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 
 import { useRef } from "react";
@@ -13,11 +10,12 @@ import { ref, uploadBytes } from "firebase/storage";
 import AppBar from "../../components/AppBar";
 import getItems from "../../components/Menu/Menu";
 import { Carousel } from "primereact/carousel";
+import { DataView, DataViewLayoutOptions } from "primereact/dataview";
 
 import "./carousel.css";
 
 import { Card } from "primereact/card";
-
+import { Button } from "primereact/button";
 
 interface Mensagem {
   id: string;
@@ -146,12 +144,69 @@ const Feed = () => {
           >
             {/* <h2 className="mb-2">{product.nomeProjeto}</h2> */}
             {/* <h4 className="mt-0 mb-3">{product.descricao}</h4> */}
-            <p className="m-0">
-              {product.descricao}
-            </p>
+            <p className="m-0">{product.descricao}</p>
             {/* <Tag value={product.nomeProjeto} severity={getSeverity(product)}></Tag> */}
-            
           </Card>
+        </div>
+      </div>
+    );
+  };
+
+  // GRID TEMPLATE
+
+  const [layout, setlayout] = useState("");
+
+  const header = () => {
+    return (
+      <div className="flex justify-content-center fz-2">
+        <p
+          style={{
+            fontSize: "2rem",
+          }}
+        >
+          Nossos projetos
+        </p>
+      </div>
+    );
+  };
+
+  const itemTemplate = (product: Product, layout: any) => {
+    if (!product) {
+      return;
+    }
+
+    if (layout === "grid") return gridItem(product);
+  };
+
+  const gridItem = (product: Product) => {
+    return (
+      <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2 ">
+        <div className="p-4 border-1 surface-border surface-card border-round item-do-dataview">
+          <div className="flex flex-wrap align-items-center justify-content-between gap-2 ">
+            <div className="flex align-items-center gap-2">
+              <i className="pi pi-briefcase"></i>
+              <span className="font-semibold">{product.nomeProjeto}</span>
+            </div>
+          </div>
+          <div className="flex flex-column align-items-center gap-3 py-5">
+            {/* <img
+              alt="Card"
+              src="https://primefaces.org/cdn/primereact/images/usercard.png"
+            /> */}
+            <div className="text-1xl font-bold descricao">
+              {product.descricao}
+            </div>
+          </div>
+          <div className="flex align-items-center justify-conteFnt-between">
+            <span className="text-2l font-semibold autor">
+              ${product.autor}
+            </span>
+            <Button
+              icon="pi pi-heart"
+              className="p-button-rounded botao"
+              // disabled={product.inventoryStatus === "OUTOFSTOCK"}
+            ></Button>
+          </div>
         </div>
       </div>
     );
@@ -161,7 +216,7 @@ const Feed = () => {
     <FeedFundo>
       {/* <Menubar model={items} start={start} end={end} /> */}
       <AppBar />
-      <Carousel
+      {/* <Carousel
         value={postsCarrossel}
         responsiveOptions={responsiveOptions}
         itemTemplate={productTemplate}
@@ -169,6 +224,14 @@ const Feed = () => {
         numScroll={1}
         circular
         autoplayInterval={3000}
+      /> */}
+
+      <DataView
+        className=""
+        value={postsCarrossel}
+        itemTemplate={itemTemplate}
+        layout={"grid"}
+        header={header()}
       />
 
       {/* <p>{JSON.stringify(postsCarrossel)}</p> */}

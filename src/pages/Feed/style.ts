@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
 export const FeedFundo = styled.div`
-
   height: 100vh;
-  width: 100vw;
+  /* width: 100vw; */
 
   margin: 0 !important;
   padding: 0 !important;
@@ -12,11 +11,40 @@ export const FeedFundo = styled.div`
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
 
   /* overflow: scroll; */
 
   header {
+  }
+
+  .item-do-dataview {
+    min-height: 100%;
+    /* max-height: 30px; */
+
+    position: relative;
+  }
+
+  .descricao {
+    max-height: 150px;
+    overflow: auto;
+
+    /* background-color: red; */
+  }
+
+  .botao {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+
+    height: 35px;
+    width: 35px;
+  }
+
+  .autor {
+    position: absolute;
+    left: 24px;
+    bottom: 18px;
   }
 `;
 
@@ -42,7 +70,6 @@ export const FeedAppBar = styled.div`
     cursor: pointer;
   }
 `;
-
 
 export const FeedSendButton = styled.button`
   height: 50px;
@@ -139,12 +166,10 @@ export const BotaoPadraoMobile = styled.button`
   &:hover {
     background-color: #33ff33; /* Cor de fundo no hover */
   }
-  
 
   @media (min-width: 700px) {
     visibility: hidden;
   }
-  
 `;
 
 export const DivBotoes = styled.div`

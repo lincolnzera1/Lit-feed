@@ -12,7 +12,7 @@ export const AddProjeto = styled.button`
   align-items: center;
   justify-content: center;
 
-  position: absolute;
+  position: fixed;
   bottom: 20px;
   right: 20px;
 
@@ -30,7 +30,7 @@ export const ModalProjetosStyle = styled.div`
 
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); 
+  transform: translate(-50%, -50%);
 
   height: 70vh;
   width: 500px;
@@ -52,7 +52,7 @@ export const ModalProjetosStyle = styled.div`
   }
 
   textarea {
-    min-height: 250px; 
+    min-height: 250px;
     width: 100%;
 
     padding: 5px;
@@ -66,21 +66,19 @@ export const ModalProjetosStyle = styled.div`
 `;
 
 export const InputProjetos = styled.input`
-    width: 200px;
-    height: 30px;
+  width: 200px;
+  height: 30px;
 
-    padding: 5px;
+  padding: 5px;
 
-    border-radius: 5px;
-    border: 1px solid black;
+  border-radius: 5px;
+  border: 1px solid black;
 
-    /* margin-left: 10px; */
-`
-
-
+  /* margin-left: 10px; */
+`;
 
 export const FundoBlack = styled.div`
-  background-color: rgba(0,0,0,0.2);
+  background-color: rgba(0, 0, 0, 0.2);
 
   /* opacity: 0.3; */
 
@@ -99,7 +97,7 @@ export const CloseButtonStyle = styled.div`
   h1 {
     cursor: pointer;
   }
-`
+`;
 
 // Estilos para o botão do menu
 export const MenuButton = styled.button`
@@ -115,15 +113,13 @@ export const MenuButton = styled.button`
 export const MenuOptions = styled.ul`
   list-style-type: none;
   padding: 0;
-  display: ${(props: { isOpen: boolean }) => (props.isOpen ? 'block' : 'none')};
+  display: ${(props: { isOpen: boolean }) => (props.isOpen ? "block" : "none")};
   position: absolute;
-
-  
 `;
 
 export const MenuItem = styled.li`
   margin: 5px 0;
-  `;
+`;
 
 export const MenuLink = styled.a`
   text-decoration: none;

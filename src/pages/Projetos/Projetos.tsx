@@ -20,6 +20,7 @@ import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { Carousel } from "primereact/carousel";
 import { Card } from "primereact/card";
+import { DataView, DataViewLayoutOptions } from "primereact/dataview";
 
 interface Product {
   nomeProjeto: String;
@@ -197,11 +198,78 @@ const Projetos = () => {
     );
   };
 
+  // GRID TEMPLATE
+
+  const [layout, setlayout] = useState("");
+
+  const header = () => {
+    return (
+      <div className="flex justify-content-center fz-2">
+        <p
+          style={{
+            fontSize: "2rem",
+          }}
+        >
+          Nossos projetos
+        </p>
+      </div>
+    );
+  };
+
+  const itemTemplate = (product: Product, layout: any) => {
+    if (!product) {
+      return;
+    }
+
+    if (layout === "grid") return gridItem(product);
+  };
+
+  const gridItem = (product: Product) => {
+    return (
+      <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2 ">
+        <div className="p-4 border-1 surface-border surface-card border-round item-do-dataview">
+          <div className="flex flex-wrap align-items-center justify-content-between gap-2 ">
+            <div className="flex align-items-center gap-2">
+              <i className="pi pi-briefcase"></i>
+              <span className="font-semibold">{product.nomeProjeto}</span>
+            </div>
+          </div>
+          <div className="flex flex-column align-items-center gap-3 py-5">
+            {/* <img
+              alt="Card"
+              src="https://primefaces.org/cdn/primereact/images/usercard.png"
+            /> */}
+            <div className="text-1xl font-bold descricao">
+              {product.descricao}
+            </div>
+          </div>
+          <div className="flex align-items-center justify-conteFnt-between">
+            <span className="text-2l font-semibold autor">
+              {product.autor}
+            </span>
+            <div className="mt-3 botao">
+              <Button className="p-button-rounded botoes mr-2" icon="pi pi-file-edit" />
+              <Button className="p-button-rounded botoes" icon="pi pi-trash" severity="danger" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <ProjetosFundo>
       <AppBar />
 
-      <Carousel
+      <DataView
+        className=""
+        value={filteredProducts}
+        itemTemplate={itemTemplate}
+        layout={"grid"}
+        header={header()}
+      />
+
+      {/* <Carousel
         value={filteredProducts}
         responsiveOptions={responsiveOptions}
         itemTemplate={productTemplate}
@@ -209,7 +277,7 @@ const Projetos = () => {
         numScroll={1}
         circular
         autoplayInterval={3000}
-      />
+      /> */}
       <Dialog
         header="Cadastro de projeto"
         visible={visible}
