@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { GlobalStyle } from "./Globaltheme";
 import Cadastro from "./pages/Cadastro/Cadastro";
 import Feed from "./pages/Feed/Feed";
@@ -13,14 +13,14 @@ const App = () => {
       padding: 0
     }}>
       <GlobalStyle />
-      <HashRouter>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/feed" element={<Feed />} />
           <Route path="/projetos" element={<Projetos />} />
         </Routes>
-      </HashRouter>
+      </BrowserRouter>
     </div>
   );
 };
