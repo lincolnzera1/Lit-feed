@@ -210,7 +210,7 @@ const Projetos = () => {
             fontSize: "2rem",
           }}
         >
-          Nossos projetos
+          Meus projetos
         </p>
       </div>
     );

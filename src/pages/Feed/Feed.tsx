@@ -199,7 +199,7 @@ const Feed = () => {
           </div>
           <div className="flex align-items-center justify-conteFnt-between">
             <span className="text-2l font-semibold autor">
-              ${product.autor}
+              {product.autor}
             </span>
             <Button
               icon="pi pi-heart"

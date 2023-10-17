@@ -63,11 +63,11 @@ const Cadastro = () => {
   const toast = useRef<any>(null);
   const [visible, setVisible] = useState(false);
 
-  const show = () => {
+  const show = (menssagem: string, severity: string, detalhe: string) => {
     toast.current.show({
-      severity: "success",
-      summary: "Conta criada",
-      detail: `Email ${formik.values.email}`,
+      severity: severity, // success
+      summary: menssagem,
+      detail: detalhe,
     });
   };
 
@@ -118,7 +118,7 @@ const Cadastro = () => {
       return errors;
     },
     onSubmit: async (data) => {
-      data && show();
+
 
       console.log("seus dados: ", data);
 
@@ -132,6 +132,9 @@ const Cadastro = () => {
           criarDataNascimento(data.nome, data.email, data.date)
             .then((dados) => {
               // Após criar tudo, loga o usuário.
+              data && show("conta criada", "success", data.email);
+              formik.resetForm();
+              // await esperarUmSegundo();
               logarUsuario(data.email, data.senha)
                 .then((user) => {
                   console.log(
@@ -150,13 +153,14 @@ const Cadastro = () => {
         .catch((erro) => {
           // Lidar com erros durante a criação do usuário
           console.error("Erro ao criar usuário:", erro);
+          data && show(erro.toString(), "error", verificacao(erro.toString()));
+          getFormErrorMessage(erro)
         });
 
       //////////////
 
-      await esperarUmSegundo();
 
-      formik.resetForm();
+
       // window.location.reload();
     },
   });
@@ -173,6 +177,37 @@ const Cadastro = () => {
       <small className="p-error">&nbsp;</small>
     );
   };
+
+  const verificacao = (error: string) => {
+    // Mensagem de erro fornecida pelo Firebase
+    let erroMensagem = "Erro ao criar usuário: Firebase: Error (auth/invalid-email).";
+
+    // Expressão regular para extrair o email da mensagem de erro
+    let emailRegex = /auth\/invalid-email/;
+    let emailMatch = error.match(emailRegex);
+
+    // Se houver correspondência com o padrão de erro de email inválido
+    if (emailMatch) {
+      console.log("Email inválido");
+      return "Bote um email válido meu fi"
+      // Agora você pode tratar o erro relacionado ao email aqui
+    } else {
+      // Se não for um erro de email inválido, então pode ser um erro de senha fraca
+      let senhaRegex = /auth\/weak-password/;
+      let senhaMatch = error.match(senhaRegex);
+
+      // Se houver correspondência com o padrão de erro de senha fraca
+      if (senhaMatch) {
+        console.log("Senha fraca");
+        return "Senha com menos de 6 caracteres";
+        // Agora você pode tratar o erro relacionado à senha aqui
+      } else {
+        console.log("Email ja em uso");
+        return "Email já em uso (muito provavelmente)"
+        // Tratar outros tipos de erros, se necessário
+      }
+    }
+  }
 
   return (
     <CadastroScreen>
@@ -251,7 +286,7 @@ const Cadastro = () => {
                     className={classNames({
                       "p-invalid": isFormFieldInvalid("senha"),
                     })}
-                    // toggleMask
+                  // toggleMask
                   />
                 </div>
               </div>
