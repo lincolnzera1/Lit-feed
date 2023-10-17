@@ -103,6 +103,15 @@ export async function getPosts() {
   return stringsList;
 }
 
+export async function getDatasDeNascimento() {
+  // console.log("oioioioi");
+  const stringsCol = collection(db, "cadastrosDatas");
+  const stringsSnapshot = await getDocs(stringsCol);
+  const stringsList = stringsSnapshot.docs.map((doc) => doc.data());
+  console.log(stringsList);
+  return stringsList;
+}
+
 export async function getProjetos() {
   // console.log("oioioioi");
   const stringsCol = collection(db, "projetos");
