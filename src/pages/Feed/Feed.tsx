@@ -53,7 +53,7 @@ const Feed = () => {
   useEffect(() => {
     const receberPosts = () => {
       getProjetos().then((strings: any) => {
-        console.log("As strings foram: " + JSON.stringify(strings));
+        // console.log("As strings foram: " + JSON.stringify(strings));
         setPosts(strings);
         let lista: [] = strings;
         setPostsCarrossel(strings.slice(0, lista.length));

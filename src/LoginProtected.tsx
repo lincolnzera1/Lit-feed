@@ -7,7 +7,10 @@ interface ProtectedRouteProps {
   children: ReactNode;
 }
 
-const Protected: React.FC<ProtectedRouteProps> = ({ isSignedIn, children }) => {
+const LoginProtected: React.FC<ProtectedRouteProps> = ({
+  isSignedIn,
+  children,
+}) => {
   const [estaAutenticado, setEstaAutenticado] = useState<boolean | null>(null);
   const [verificandoAutenticacao, setVerificandoAutenticacao] =
     useState<boolean>(true);
@@ -16,13 +19,11 @@ const Protected: React.FC<ProtectedRouteProps> = ({ isSignedIn, children }) => {
     const verificarAutenticacao = async () => {
       try {
         const usuarioAutenticado: boolean = await usuarioEstado();
-        console.log("BBBBBBBBB: ", usuarioAutenticado);
+        console.log("CCCCCCCCC: ", usuarioAutenticado);
         setEstaAutenticado(usuarioAutenticado ? true : false);
       } catch (error) {
-        console.error("Erro ao verificar autenticação:", error);
         setEstaAutenticado(false);
       } finally {
-        console.log("passamos aqui?");
         setVerificandoAutenticacao(false); // Atualiza o estado de verificação
       }
     };
@@ -34,13 +35,13 @@ const Protected: React.FC<ProtectedRouteProps> = ({ isSignedIn, children }) => {
 
   if (estaAutenticado) {
     console.log("VC ESTÁ LOGADO!!!: ", estaAutenticado);
-    return <>{children}</>; // Renderize o conteúdo protegido se estiver autenticado
+    return <Navigate to="/" />; // Renderize o conteúdo protegido se estiver autenticado
   } else if (verificandoAutenticacao) {
     return <div>Verificando autenticação...</div>;
   } else {
     console.log("VC NAO ESTÁ LOGADO", estaAutenticado);
-    return <Navigate to="/login" />; // Redirecione para a página de login se não estiver autenticado
+    return <>{children}</>; // Redirecione para a página de login se não estiver autenticado
   }
 };
 
-export default Protected;
+export default LoginProtected;

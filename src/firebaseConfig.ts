@@ -102,7 +102,7 @@ export async function getPosts() {
   const stringsCol = collection(db, "posts");
   const stringsSnapshot = await getDocs(stringsCol);
   const stringsList = stringsSnapshot.docs.map((doc) => doc.data());
-  console.log(stringsList);
+  // console.log(stringsList);
   return stringsList;
 }
 
@@ -120,7 +120,7 @@ export async function getProjetos() {
   const stringsCol = collection(db, "projetos");
   const stringsSnapshot = await getDocs(stringsCol);
   const stringsList = stringsSnapshot.docs.map((doc) => doc.data());
-  console.log(stringsList);
+  // console.log(stringsList);
   return stringsList;
 }
 

@@ -57,7 +57,7 @@ const Login = () => {
                 /* console.log(
                   `Usuário ${JSON.stringify(user)} logado com sucesso`
                 ); */
-                await usuarioEstado();
+                // await usuarioEstado();
                 navigate("/");
                 setLoadState(false);
               })

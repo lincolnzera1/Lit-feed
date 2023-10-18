@@ -8,6 +8,7 @@ import Projetos from "./pages/Projetos/Projetos";
 import Protected from "./Protected";
 import { auth, usuarioEstado } from "./firebaseConfig";
 import { ProgressSpinner } from "primereact/progressspinner";
+import LoginProtected from "./LoginProtected";
 
 const App = () => {
   const [estaAutenticado, setEstaAutenticado] = useState<boolean | null>(null);
@@ -17,11 +18,14 @@ const App = () => {
     const verificarAutenticacao = async () => {
       try {
         const usuarioAutenticado: boolean = await usuarioEstado();
-        setEstaAutenticado(true);
+        // console.log("esperado: ", usuarioAutenticado);
+        // console.log("esperado123: ");
+        setEstaAutenticado(usuarioAutenticado ? true : false);
       } catch (error) {
-        console.error("Erro ao verificar autenticação:", error);
+        // console.error("Erro ao verificar autenticação:", error);
         setEstaAutenticado(false);
       } finally {
+        // console.log("passamos aqui?");
         setVerificandoAutenticacao(false); // Atualiza o estado de verificação
       }
     };
@@ -57,8 +61,22 @@ const App = () => {
           </div>
         ) : (
           <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/cadastro" element={<Cadastro />} />
+            <Route
+              path="/login"
+              element={
+                <LoginProtected isSignedIn={estaAutenticado}>
+                  <Login />
+                </LoginProtected>
+              }
+            />
+            <Route
+              path="/cadastro"
+              element={
+                <LoginProtected isSignedIn={estaAutenticado}>
+                  <Cadastro />
+                </LoginProtected>
+              }
+            />
 
             <Route
               path="/"
