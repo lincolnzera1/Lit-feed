@@ -22,6 +22,7 @@ const getItems = () => {
     {
       label: "Aniversariantes do mês",
       icon: "pi pi-fw pi-user",
+      command: () => navigate("/aniversarios"),
     },
     // {
     //   label: "Events",

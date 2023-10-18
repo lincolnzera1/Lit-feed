@@ -66,8 +66,8 @@ const Cadastro = () => {
   const show = (menssagem: string, severity: string, detalhe: string) => {
     toast.current.show({
       severity: severity, // success
-      summary: menssagem,
-      detail: detalhe,
+      summary: detalhe,
+      detail: "acelere, bora",
     });
   };
 
@@ -111,15 +111,13 @@ const Cadastro = () => {
         errors!.confirmarSenha = "faltou confirmar a senha";
         setErrorMessage("confirmarSenha");
       } else if (!data.date) {
-        errors!.date = "Faltou a data de aniversario .";
+        errors!.date = "Faltou a data de nascimento .";
         setErrorMessage("date");
       }
 
       return errors;
     },
     onSubmit: async (data) => {
-
-
       console.log("seus dados: ", data);
 
       //////Adicionar o que quero/////////
@@ -154,18 +152,21 @@ const Cadastro = () => {
           // Lidar com erros durante a criação do usuário
           console.error("Erro ao criar usuário:", erro);
           data && show(erro.toString(), "error", verificacao(erro.toString()));
-          getFormErrorMessage(erro)
+          getFormErrorMessage(erro);
         });
 
       //////////////
-
-
 
       // window.location.reload();
     },
   });
 
-  type FormikTouchedKeys3 = "nome" | "email" | "senha" | "confirmarSenha" | "date";
+  type FormikTouchedKeys3 =
+    | "nome"
+    | "email"
+    | "senha"
+    | "confirmarSenha"
+    | "date";
 
   const isFormFieldInvalid = (name: FormikTouchedKeys3) =>
     !!(formik.touched[name] && formik.errors[name]);
@@ -180,7 +181,8 @@ const Cadastro = () => {
 
   const verificacao = (error: string) => {
     // Mensagem de erro fornecida pelo Firebase
-    let erroMensagem = "Erro ao criar usuário: Firebase: Error (auth/invalid-email).";
+    let erroMensagem =
+      "Erro ao criar usuário: Firebase: Error (auth/invalid-email).";
 
     // Expressão regular para extrair o email da mensagem de erro
     let emailRegex = /auth\/invalid-email/;
@@ -189,7 +191,7 @@ const Cadastro = () => {
     // Se houver correspondência com o padrão de erro de email inválido
     if (emailMatch) {
       console.log("Email inválido");
-      return "Bote um email válido meu fi"
+      return "Bote um email válido meu fi";
       // Agora você pode tratar o erro relacionado ao email aqui
     } else {
       // Se não for um erro de email inválido, então pode ser um erro de senha fraca
@@ -203,11 +205,11 @@ const Cadastro = () => {
         // Agora você pode tratar o erro relacionado à senha aqui
       } else {
         console.log("Email ja em uso");
-        return "Email já em uso (muito provavelmente)"
+        return "Email já em uso (muito provavelmente)";
         // Tratar outros tipos de erros, se necessário
       }
     }
-  }
+  };
 
   return (
     <CadastroScreen>
@@ -286,7 +288,7 @@ const Cadastro = () => {
                     className={classNames({
                       "p-invalid": isFormFieldInvalid("senha"),
                     })}
-                  // toggleMask
+                    // toggleMask
                   />
                 </div>
               </div>
@@ -321,6 +323,7 @@ const Cadastro = () => {
                 <Calendar
                   id="dataNascimento"
                   name="dataNascimento"
+                  placeholder="Data de nascimento"
                   value={formik.values.date}
                   onChange={(e) => {
                     formik.setFieldValue("date", e.value);
@@ -341,7 +344,6 @@ const Cadastro = () => {
                   showIcon
                 />
                 {getFormErrorMessage(errorMessage as FormikTouchedKeys3)}
-
               </div>
             </div>
 

@@ -53,7 +53,7 @@ const Feed = () => {
   useEffect(() => {
     const receberPosts = () => {
       getProjetos().then((strings: any) => {
-        // console.log("As strings foram: " + JSON.stringify(strings));
+        console.log("As strings foram: " + JSON.stringify(strings));
         setPosts(strings);
         let lista: [] = strings;
         setPostsCarrossel(strings.slice(0, lista.length));
@@ -189,10 +189,10 @@ const Feed = () => {
             </div>
           </div>
           <div className="flex flex-column align-items-center gap-3 py-5">
-            {/* <img
+            <img
               alt="Card"
               src="https://primefaces.org/cdn/primereact/images/usercard.png"
-            /> */}
+            />
             <div className="text-1xl font-bold descricao">
               {product.descricao}
             </div>
