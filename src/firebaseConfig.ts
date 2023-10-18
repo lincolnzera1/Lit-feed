@@ -13,6 +13,7 @@ import { getDatabase, onValue, push } from "firebase/database";
 import { ref, set } from "firebase/database";
 import { uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
 import { Nullable } from "primereact/ts-helpers";
+import { onAuthStateChanged, User } from "firebase/auth";
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
@@ -197,5 +198,26 @@ export const criarUsuario = (
         console.error(`Erro ao criar usuário: ${errorMessage}`);
         reject(new Error(errorMessage));
       });
+  });
+};
+
+export const usuarioEstado = (): Promise<boolean> => {
+  return new Promise((resolve) => {
+    const unsubscribe = onAuthStateChanged(auth, (user: User | null) => {
+      if (user) {
+        // O usuário está autenticado
+        console.log(user);
+        console.log("RESOLVE TRUE")
+        resolve(true);
+      } else {
+        // O usuário não está autenticado
+        // console.log("valor nulo para usuario");
+        console.log("RESOLVE FALSE")
+        resolve(false);
+      }
+
+      // Não se esqueça de chamar o unsubscribe para interromper a observação
+      unsubscribe();
+    });
   });
 };

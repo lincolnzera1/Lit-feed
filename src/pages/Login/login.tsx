@@ -15,7 +15,7 @@ import LitPng from "../../assets/lit.png";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
-import { criarUsuario } from "../../firebaseConfig";
+import { criarUsuario, usuarioEstado } from "../../firebaseConfig";
 import { logarUsuario } from "../../services/actions/login";
 import { useNavigate } from "react-router-dom";
 import { PacmanLoader } from "react-spinners";
@@ -53,11 +53,12 @@ const Login = () => {
           onClick={() => {
             setLoadState(true);
             logarUsuario(email, senha)
-              .then((user) => {
-                console.log(
+              .then(async (user) => {
+                /* console.log(
                   `Usuário ${JSON.stringify(user)} logado com sucesso`
-                );
-                navigate("/feed");
+                ); */
+                await usuarioEstado();
+                navigate("/");
                 setLoadState(false);
               })
               .catch((error) => {

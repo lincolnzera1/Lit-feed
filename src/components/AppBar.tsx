@@ -26,7 +26,7 @@ const AppBar = () => {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      navigate("/"); // Use a função de navegação aqui
+      navigate("/login"); // Use a função de navegação aqui
     } catch (error) {
       console.error("Erro ao fazer logout:", error);
     }
@@ -37,13 +37,13 @@ const AppBar = () => {
   const items = getItems();
   // HEADER
   const start = <img alt="logo" src={Lit} height="40" className="mr-2"></img>;
-  const end = <Button label="Sair" severity="danger" onClick={handleLogout}/>;
+  const end = <Button label="Sair" severity="danger" onClick={handleLogout} />;
   return (
     <div
       style={{
         // position: "fixed",
         // top: 0,
-        // width: "100vw",  
+        // width: "100vw",
         zIndex: 10,
       }}
     >

@@ -16,8 +16,6 @@ export const logarUsuario = (email: string, password: string) => {
         const user = userCredential.user;
         console.log(`Usuário ${user} logado com sucesso.`);
 
-        
-
         // Get user display name
         const displayName = user.displayName;
         console.log(displayName + " é o nome da fera");
