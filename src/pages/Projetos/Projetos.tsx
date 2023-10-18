@@ -35,28 +35,6 @@ const Projetos = () => {
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [errorMessage, setErrorMessage] = useState<String>("");
 
-  useEffect(() => {
-    const receberPosts = () => {
-      getProjetos().then((strings: any) => {
-        setPosts(strings);
-        let lista: [] = strings.filter(
-          (product: Product) =>
-            product.autor === localStorage.getItem("usuario")
-        );
-        setPostsCarrossel(strings.slice(0, lista.length));
-        setFilteredProducts(
-          strings
-            .filter(
-              (product: Product) =>
-                product.autor === localStorage.getItem("usuario")
-            )
-            .slice(0, lista.length)
-        );
-      });
-    };
-    receberPosts();
-  }, []);
-
   async function esperarUmSegundo(): Promise<void> {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -100,13 +78,9 @@ const Projetos = () => {
         errors!.value = "Name - Surname is required.";
 
         setErrorMessage("value");
-
-        console.log("ERRO ACUSADO##########");
       } else if (!data.descricao) {
         errors!.descricao = "descricao - descricao is required.";
         setErrorMessage("descricao");
-
-        console.log(" 2 - ERRO ACUSADO##########");
       }
 
       return errors;
@@ -123,7 +97,8 @@ const Projetos = () => {
       await esperarUmSegundo();
 
       formik.resetForm();
-      window.location.reload();
+      setVisible(false);
+      // window.location.reload();
     },
   });
 
@@ -244,18 +219,46 @@ const Projetos = () => {
             </div>
           </div>
           <div className="flex align-items-center justify-conteFnt-between">
-            <span className="text-2l font-semibold autor">
-              {product.autor}
-            </span>
+            <span className="text-2l font-semibold autor">{product.autor}</span>
             <div className="mt-3 botao">
-              <Button className="p-button-rounded botoes mr-2" icon="pi pi-file-edit" />
-              <Button className="p-button-rounded botoes" icon="pi pi-trash" severity="danger" />
+              <Button
+                className="p-button-rounded botoes mr-2"
+                icon="pi pi-file-edit"
+              />
+              <Button
+                className="p-button-rounded botoes"
+                icon="pi pi-trash"
+                severity="danger"
+              />
             </div>
           </div>
         </div>
       </div>
     );
   };
+
+  useEffect(() => {
+    const receberPosts = () => {
+      getProjetos().then((strings: any) => {
+        setPosts(strings);
+        let lista: [] = strings.filter(
+          (product: Product) =>
+            product.autor === localStorage.getItem("usuario")
+        );
+        setPostsCarrossel(strings.slice(0, lista.length));
+        setFilteredProducts(
+          strings
+            .filter(
+              (product: Product) =>
+                product.autor === localStorage.getItem("usuario")
+            )
+            .slice(0, lista.length)
+        );
+      });
+    };
+    receberPosts();
+    console.log("Estou atualizando muito?");
+  }, [visible]);
 
   return (
     <ProjetosFundo>

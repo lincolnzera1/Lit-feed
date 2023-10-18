@@ -11,6 +11,10 @@ const Protected: React.FC<ProtectedRouteProps> = ({ isSignedIn, children }) => {
     return <div>Verificando autenticação...</div>;
   } */
 
+  console.log("PODE ENTRAR?\nPorteiro: ", isSignedIn);
+
+  console.log("dkowqpdwkqop");
+
   if (isSignedIn) {
     console.log("VC ESTÁ LOGADO!!!");
     return <>{children}</>; // Renderize o conteúdo protegido se estiver autenticado

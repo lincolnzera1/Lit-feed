@@ -53,6 +53,8 @@ type StringData = {
   value: unknown;
 };
 
+
+
 export function listenStrings(callback: (strings: StringData[]) => void) {
   const db = getDatabase();
   const stringsRef = ref(db, "strings");
@@ -207,12 +209,12 @@ export const usuarioEstado = (): Promise<boolean> => {
       if (user) {
         // O usuário está autenticado
         console.log(user);
-        console.log("RESOLVE TRUE")
+        console.log("RESOLVE TRUE");
         resolve(true);
       } else {
         // O usuário não está autenticado
         // console.log("valor nulo para usuario");
-        console.log("RESOLVE FALSE")
+        console.log("RESOLVE FALSE");
         resolve(false);
       }
 

@@ -12,7 +12,7 @@ const getItems = () => {
     {
       label: "Projetos do lit",
       icon: "pi pi-fw pi-briefcase",
-      command: () => navigate("/feed"),
+      command: () => navigate("/"),
     },
     {
       label: "Meus projetos",

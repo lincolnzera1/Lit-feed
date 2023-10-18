@@ -140,7 +140,7 @@ const Cadastro = () => {
                   console.log(
                     `Usuário ${JSON.stringify(user)} logado com sucesso`
                   );
-                  navigate("/feed");
+                  navigate("/");
                 })
                 .catch((error) => {
                   console.error(`Erro ao logarr: ${error.message}`);

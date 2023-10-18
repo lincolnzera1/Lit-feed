@@ -6,25 +6,28 @@ import Feed from "./pages/Feed/Feed";
 import Login from "./pages/Login/login";
 import Projetos from "./pages/Projetos/Projetos";
 import Protected from "./Protected";
-import { usuarioEstado } from "./firebaseConfig";
+import { auth, usuarioEstado } from "./firebaseConfig";
+import { ProgressSpinner } from "primereact/progressspinner";
 
 const App = () => {
   const [estaAutenticado, setEstaAutenticado] = useState<boolean | null>(null);
+  const [verificandoAutenticacao, setVerificandoAutenticacao] = useState(true);
 
   useEffect(() => {
     const verificarAutenticacao = async () => {
       try {
         const usuarioAutenticado: boolean = await usuarioEstado();
         setEstaAutenticado(true);
-        console.log("Sua verificação deu certo: ", usuarioAutenticado);
       } catch (error) {
         console.error("Erro ao verificar autenticação:", error);
-        setEstaAutenticado(false); // Define como falso em caso de erro
+        setEstaAutenticado(false);
+      } finally {
+        setVerificandoAutenticacao(false); // Atualiza o estado de verificação
       }
     };
 
     verificarAutenticacao();
-  }, []); // Executa somente uma vez, após a montagem do componente
+  }, []);
 
   return (
     <div
@@ -35,27 +38,47 @@ const App = () => {
     >
       <GlobalStyle />
       <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/cadastro" element={<Cadastro />} />
-          <Route
-            path="/"
-            element={
-              <Protected isSignedIn={estaAutenticado}>
-                <Feed />
-              </Protected>
-            }
-          />
+        {verificandoAutenticacao ? (
+          <div
+            style={{
+              height: "100vh",
+              width: "100vw",
+              display: "flex",
+              alignContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <ProgressSpinner
+              style={{ width: "50px", height: "50px" }}
+              strokeWidth="8"
+              fill="var(--surface-ground)"
+              animationDuration=".5s"
+            />
+          </div>
+        ) : (
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/cadastro" element={<Cadastro />} />
 
-          <Route
-            path="/projetos"
-            element={
-              <Protected isSignedIn={estaAutenticado}>
-                <Feed />
-              </Protected>
-            }
-          />
-        </Routes>
+            <Route
+              path="/"
+              element={
+                <Protected isSignedIn={estaAutenticado}>
+                  <Feed />
+                </Protected>
+              }
+            />
+
+            <Route
+              path="/projetos"
+              element={
+                <Protected isSignedIn={estaAutenticado}>
+                  <Projetos />
+                </Protected>
+              }
+            />
+          </Routes>
+        )}
       </BrowserRouter>
     </div>
   );
