@@ -121,39 +121,45 @@ const Cadastro = () => {
       console.log("seus dados: ", data);
 
       //////Adicionar o que quero/////////
-      criarUsuario(data.email, data.senha, data.nome)
-        .then((usuarioCriado) => {
-          // Aqui você pode lidar com o usuário criado com sucesso
-          console.log("Usuário criado com sucesso:", usuarioCriado);
 
-          // Associa uma data de nascimento a um usuario
-          criarDataNascimento(data.nome, data.email, data.date)
-            .then((dados) => {
-              // Após criar tudo, loga o usuário.
-              data && show("conta criada", "success", data.email);
-              formik.resetForm();
-              // await esperarUmSegundo();
-              logarUsuario(data.email, data.senha)
-                .then((user) => {
-                  console.log(
-                    `Usuário ${JSON.stringify(user)} logado com sucesso`
-                  );
-                  navigate("/");
-                })
-                .catch((error) => {
-                  console.error(`Erro ao logarr: ${error.message}`);
-                });
-            })
-            .catch((erro) => {
-              console.log("Erro ao criar data de nascimento: " + erro);
-            });
-        })
-        .catch((erro) => {
-          // Lidar com erros durante a criação do usuário
-          console.error("Erro ao criar usuário:", erro);
-          data && show(erro.toString(), "error", verificacao(erro.toString()));
-          getFormErrorMessage(erro);
-        });
+      if (data.senha === data.confirmarSenha) {
+        criarUsuario(data.email, data.senha, data.nome)
+          .then((usuarioCriado) => {
+            // Aqui você pode lidar com o usuário criado com sucesso
+            console.log("Usuário criado com sucesso:", usuarioCriado);
+
+            // Associa uma data de nascimento a um usuario
+            criarDataNascimento(data.nome, data.email, data.date)
+              .then((dados) => {
+                // Após criar tudo, loga o usuário.
+                data && show("conta criada", "success", data.email);
+                formik.resetForm();
+                // await esperarUmSegundo();
+                logarUsuario(data.email, data.senha)
+                  .then((user) => {
+                    console.log(
+                      `Usuário ${JSON.stringify(user)} logado com sucesso`
+                    );
+                    navigate("/");
+                  })
+                  .catch((error) => {
+                    console.error(`Erro ao logarr: ${error.message}`);
+                  });
+              })
+              .catch((erro) => {
+                console.log("Erro ao criar data de nascimento: " + erro);
+              });
+          })
+          .catch((erro) => {
+            // Lidar com erros durante a criação do usuário
+            console.error("Erro ao criar usuário:", erro);
+            data &&
+              show(erro.toString(), "error", verificacao(erro.toString()));
+            getFormErrorMessage(erro);
+          });
+      } else {
+        show("erro.toString()", "error", "Senhas não são iguais");
+      }
 
       //////////////
 

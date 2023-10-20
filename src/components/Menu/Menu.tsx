@@ -7,7 +7,7 @@ const getItems = () => {
   const items = [
     {
       label: `${localStorage.getItem("usuario")}`,
-      icon: "pi pi-fw pi-user"
+      icon: "pi pi-fw pi-user",
     },
     {
       label: "Projetos do lit",
@@ -22,7 +22,12 @@ const getItems = () => {
     {
       label: "Aniversariantes do mês",
       icon: "pi pi-fw pi-user",
-      command: () => navigate("/aniversarios"),
+      command: () => navigate("/aniversariantes"),
+    },
+    {
+      label: "Datas de aniversário",
+      icon: "pi pi-fw pi-user",
+      command: () => navigate("/datas"),
     },
     // {
     //   label: "Events",

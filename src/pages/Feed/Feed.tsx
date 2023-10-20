@@ -188,19 +188,26 @@ const Feed = () => {
               <span className="font-semibold">{product.nomeProjeto}</span>
             </div>
           </div>
-          <div className="flex flex-column align-items-center gap-3 py-5">
+          <div
+            className="flex flex-column align-items-center gap-3 py-5"
+            style={{
+              objectFit: "cover",
+            }}
+          >
             <img
               alt="Card"
               src="https://primefaces.org/cdn/primereact/images/usercard.png"
+              style={{
+                objectFit: "contain",
+                maxWidth: 250,
+              }}
             />
             <div className="text-1xl font-bold descricao">
               {product.descricao}
             </div>
           </div>
           <div className="flex align-items-center justify-conteFnt-between">
-            <span className="text-2l font-semibold autor">
-              {product.autor}
-            </span>
+            <span className="text-2l font-semibold autor">{product.autor}</span>
             <Button
               icon="pi pi-heart"
               className="p-button-rounded botao"

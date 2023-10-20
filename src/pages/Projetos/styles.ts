@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const ProjetosFundo = styled.div`
-  background-color: lightyellow;
+  background-color: white;
   height: 100vh;
   /* width: 100vw; */
   display: flex;

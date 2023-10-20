@@ -9,7 +9,8 @@ import Protected from "./Protected";
 import { auth, usuarioEstado } from "./firebaseConfig";
 import { ProgressSpinner } from "primereact/progressspinner";
 import LoginProtected from "./LoginProtected";
-import Aniversarios from "./pages/Anviersarios/Aniversarios";
+import AniversariosDoMes from "./pages/AnviersariosDoMes/AniversariosDoMes";
+import AniversariosDoAno from "./pages/AniversariosDoAno/AnviersariosDoAno";
 
 const App = () => {
   const [estaAutenticado, setEstaAutenticado] = useState<boolean | null>(null);
@@ -98,10 +99,19 @@ const App = () => {
             />
 
             <Route
-              path="/aniversarios"
+              path="/aniversariantes"
               element={
                 <Protected>
-                  <Aniversarios />
+                  <AniversariosDoMes />
+                </Protected>
+              }
+            />
+
+            <Route
+              path="/datas"
+              element={
+                <Protected>
+                  <AniversariosDoAno />
                 </Protected>
               }
             />

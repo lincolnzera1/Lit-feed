@@ -41,9 +41,9 @@ const AppBar = () => {
   return (
     <div
       style={{
-        // position: "fixed",
-        // top: 0,
-        // width: "100vw",
+        /* position: "fixed",
+        top: 0,
+        width: "100vw", */
         zIndex: 10,
       }}
     >

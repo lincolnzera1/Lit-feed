@@ -14,7 +14,7 @@ interface Product {
   nome: String;
 }
 
-const Aniversarios = () => {
+const AniversariosDoAno = () => {
   const [postsCarrossel, setPostsCarrossel] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -41,9 +41,13 @@ const Aniversarios = () => {
     const mesPessoaFormatado = mesNascimento.toString();
 
     return (
-      <div className="col-12" style={{
-        backgroundColor: mesAtualFormatado === mesPessoaFormatado ? "lightgreen" : "white"
-      }}>
+      <div
+        className="col-12"
+        style={{
+          backgroundColor:
+            mesAtualFormatado === mesPessoaFormatado ? "lightgreen" : "white",
+        }}
+      >
         <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
           <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
             <div className="flex flex-column align-items-center sm:align-items-start gap-3">
@@ -51,21 +55,25 @@ const Aniversarios = () => {
               <div className="flex align-items-center gap-3">
                 <span className="flex align-items-center gap-2">
                   <i className="pi pi-clock"></i>
+                  <p>Aniversário: </p>
                   <span className="font-semibold">
                     {new Date(product.dataNascimento.seconds * 1000)
                       .getDate()
                       .toString()}
-                    /{mesPessoaFormatado}/
+                    /{mesPessoaFormatado}
+                    {/* /
                     {new Date(product.dataNascimento.seconds * 1000)
                       .getFullYear()
-                      .toString()}
+                      .toString()} */}
                   </span>
                 </span>
               </div>
             </div>
             <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
               <span className="text-2xl font-semibold">
-                {mesAtualFormatado === mesPessoaFormatado ? "FAZ ANIVERSÁRIO ESSE MÊS" : "NÃO"}
+                {mesAtualFormatado === mesPessoaFormatado
+                  ? "FAZ ANIVERSÁRIO ESSE MÊS"
+                  : ""}
               </span>
               {/* <Button
                 icon="pi pi-shopping-cart"
@@ -88,4 +96,4 @@ const Aniversarios = () => {
   );
 };
 
-export default Aniversarios;
+export default AniversariosDoAno;
