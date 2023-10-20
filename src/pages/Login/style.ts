@@ -4,7 +4,7 @@ export const LoginScreen = styled.div`
   position: relative;
 
   /* background-color: #22e922; */
-  background-color: #C1FFA3;
+  background-color: #c1ffa3;
   height: 100vh;
   width: 100vw;
 
@@ -41,6 +41,14 @@ export const ContainerBrancoLogin = styled.div`
   p {
     margin-top: 20px;
   }
+
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
 `;
 
 export const LogoLit = styled.img`
@@ -70,7 +78,7 @@ export const LoginInput = styled.input`
 `;
 
 export const LoginButton = styled.button`
-  background-color: #C1FFA3;
+  background-color: #c1ffa3;
 
   position: relative;
 
