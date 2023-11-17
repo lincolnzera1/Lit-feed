@@ -110,8 +110,7 @@ const Login = () => {
           if (/auth\/user-not-found/.test(error.message)) {
             show("erro ao logar", "error", "Usuário não encontrado");
             console.log("Erro: Usuário não encontrado.");
-          }
-          else if (/auth\/wrong-password/.test(error.message)) {
+          } else if (/auth\/wrong-password/.test(error.message)) {
             show("erro ao logar", "error", "Senha incorreta");
             console.log("Erro: Senha incorreta.");
           }
@@ -144,8 +143,7 @@ const Login = () => {
       <LogoLit src={LitPng} />
       <ContainerBrancoLogin>
         <h2>Bem-vindo</h2>
-        <form action="#" onSubmit={formik.handleSubmit} style={{
-        }}>
+        <form action="#" onSubmit={formik.handleSubmit} style={{}}>
           <Toast ref={toast} />
           <LoginInput
             id="email"
@@ -172,7 +170,7 @@ const Login = () => {
               "p-invalid": isFormFieldInvalid("senha"),
             })}
           />
-          {/* {getFormErrorMessage(errorMessage as FormikTouchedKeys3)} */}
+          {getFormErrorMessage(errorMessage as FormikTouchedKeys3)}
           <LoginButton type="submit">
             {loadState ? (
               <PacmanLoader
