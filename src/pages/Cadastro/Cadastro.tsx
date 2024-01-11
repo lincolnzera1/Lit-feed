@@ -118,7 +118,7 @@ const Cadastro = () => {
       return errors;
     },
     onSubmit: async (data) => {
-      console.log("seus dados: ", data);
+      // console.log("seus dados: ", data);
 
       //////Adicionar o que quero/////////
 

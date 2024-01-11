@@ -20,7 +20,7 @@ const AniversariosDoAno = () => {
   useEffect(() => {
     const receberPosts = () => {
       getDatasDeNascimento().then((strings: any) => {
-        console.log("As strings foram: " + JSON.stringify(strings));
+        // console.log("As strings foram: " + JSON.stringify(strings));
         // setPosts(strings);
         let lista: [] = strings;
         setPostsCarrossel(strings.slice(0, lista.length));
@@ -33,7 +33,7 @@ const AniversariosDoAno = () => {
     const dataAtual = new Date();
     const mesAtual = dataAtual.getMonth() + 1; // Janeiro é 0, então adicionamos 1 para obter o mês atual
     const mesAtualFormatado = mesAtual.toString();
-    console.log("mes atual ", mesAtual);
+    // console.log("mes atual ", mesAtual);
 
     const dataNascimentoEmSegundos = product.dataNascimento.seconds;
     const mesNascimento =
@@ -72,7 +72,7 @@ const AniversariosDoAno = () => {
             <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
               <span className="text-2xl font-semibold">
                 {mesAtualFormatado === mesPessoaFormatado
-                  ? "FAZ ANIVERSÁRIO ESSE MÊS"
+                  ? "Faz aniversário esse mês"
                   : ""}
               </span>
               {/* <Button

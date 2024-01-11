@@ -111,7 +111,7 @@ export async function getDatasDeNascimento() {
   const stringsCol = collection(db, "cadastrosDatas");
   const stringsSnapshot = await getDocs(stringsCol);
   const stringsList = stringsSnapshot.docs.map((doc) => doc.data());
-  console.log(stringsList);
+  // console.log(stringsList);
   return stringsList;
 }
 
@@ -208,8 +208,8 @@ export const usuarioEstado = (): Promise<boolean> => {
     const unsubscribe = onAuthStateChanged(auth, (user: User | null) => {
       if (user) {
         // O usuário está autenticado
-        console.log(user);
-        console.log("RESOLVE TRUE");
+        // console.log(user);
+        // console.log("RESOLVE TRUE");
         resolve(true);
       } else {
         // O usuário não está autenticado

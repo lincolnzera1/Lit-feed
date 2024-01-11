@@ -88,7 +88,7 @@ const Projetos = () => {
     onSubmit: async (data) => {
       data && show();
 
-      console.log("seus dados: ", data);
+      // console.log("seus dados: ", data);
 
       //////Adicionar o que quero/////////
       storeProject(data.value, data.descricao);
@@ -257,7 +257,7 @@ const Projetos = () => {
       });
     };
     receberPosts();
-    console.log("Estou atualizando muito?");
+    // console.log("Estou atualizando muito?");
   }, [visible]);
 
   return (
